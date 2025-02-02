@@ -1,0 +1,10 @@
+{
+  "name": "notion-illustration-changing",
+  "main": "index.js",
+  "type": "module",
+  "author": "jantang",
+  "license": "MIT",
+  "dependencies": {
+    "@notionhq/client": "^2.2.15"
+  }
+}

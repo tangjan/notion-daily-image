@@ -1,0 +1,1 @@
+Automatically replaces the decorative picture on [my blog](https://tangjiayan.notion.site/05091d263a514c638f1ec56e40e0a4ac#189ef388466580c8b879c3b7495e0f6e) with a random illustration from my Notion database every day at 6:00 AM.
