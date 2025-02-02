@@ -1,0 +1,34 @@
+name: Update Notion BLOG Illustration
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+jobs:
+  update_illustration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    env:
+      NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+      NOTION_BLOG_PAGE_ID: ${{ variables.NOTION_BLOG_PAGE_ID }}
+      NOTION_POSITION_BLOCK_ID: ${{ variables.NOTION_POSITION_BLOCK_ID }}
+      NOTION_ILLUSTRATION_DATABASE_ID: ${{ variables.NOTION_ILLUSTRATION_DATABASE_ID }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run illustration script
+        run: node illustration_replacing.js
+        continue-on-error: false
