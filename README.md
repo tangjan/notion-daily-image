@@ -1,4 +1,4 @@
-Automatically replaces the image block of my Notion pages every day with a random image from my sources.
+Automatically replaces image blocks in my Notion pages with a random image from my sources every day.
 
 blog: [tangjiayan.notion.site](https://tangjiayan.notion.site)
 
