@@ -1,1 +1,5 @@
-Automatically replaces the decorative picture on [my blog](https://tangjiayan.notion.site/05091d263a514c638f1ec56e40e0a4ac#189ef388466580c8b879c3b7495e0f6e) with a random illustration from [my Notion database](https://tangjiayan.notion.site/18bef388466580ff9778eddd28e9e472) every day at 6:00 AM.
+Automatically replaces the image block of my Notion pages every day with a random image from my sources.
+
+blog: [tangjiayan.notion.site](https://tangjiayan.notion.site)
+
+notes: [tangjiayan.notion.site/note](https://tangjiayan.notion.site/note)
