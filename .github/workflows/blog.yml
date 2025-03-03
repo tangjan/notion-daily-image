@@ -12,10 +12,7 @@ jobs:
     timeout-minutes: 10
 
     env:
-      NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
-      NOTION_BLOG_PAGE_ID: ${{ vars.NOTION_BLOG_PAGE_ID }}
-      NOTION_POSITION_BLOCK_ID: ${{ vars.NOTION_POSITION_BLOCK_ID }}
-      NOTION_ILLUSTRATION_DATABASE_ID: ${{ vars.NOTION_ILLUSTRATION_DATABASE_ID }}
+      NOTION_BLOG_API_KEY: ${{ secrets.NOTION_BLOG_API_KEY }}
 
     steps:
       - name: Checkout repository
@@ -24,12 +21,12 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: "npm"
 
       - name: Install dependencies
         run: npm install
 
       - name: Run illustration script
-        run: node illustration_replacing.js
+        run: node scripts/blog/index.js
         continue-on-error: false
