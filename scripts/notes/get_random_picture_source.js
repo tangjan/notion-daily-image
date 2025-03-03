@@ -3,10 +3,7 @@
 import fetch from "node-fetch";
 import fs from "fs";
 import path from "path";
-import dotenv from "dotenv";
 import { getUnusedPages } from "../common/get_random_image_from_notion_database.js";
-
-dotenv.config();
 
 const JSON_URL =
   "https://gist.githubusercontent.com/tangjan/ceb852425be20b772ee2625d9b5ee606/raw/9a0e20bac4f805cdd72336fde13553b1a9d93e51/Anime-Girls-Holding-Programming-Books-710px-width.json";
