@@ -81,7 +81,7 @@ function saveSelectedImages(selectedImages) {
 
     fs.writeFileSync(
       SELECTED_JSON,
-      JSON.stringify({ selected: selectedImages }, null, 2)
+      JSON.stringify({ selectedImages }, null, 2)
     );
     console.log(
       `Saved ${selectedImages.length} selected images to ${SELECTED_JSON}`
