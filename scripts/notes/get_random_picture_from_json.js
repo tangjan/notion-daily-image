@@ -79,12 +79,24 @@ function saveSelectedImages(selectedImages) {
       fs.mkdirSync(dir, { recursive: true });
     }
 
+    // 读取现有内容
+    let existingData = { selectedImages: [] };
+    if (fs.existsSync(SELECTED_JSON)) {
+      const fileContent = fs.readFileSync(SELECTED_JSON, "utf8");
+      existingData = JSON.parse(fileContent);
+    }
+
+    // 合并现有内容和新内容
+    const updatedData = {
+      selectedImages: [...selectedImages, ...existingData.selectedImages]
+    };
+
     fs.writeFileSync(
       SELECTED_JSON,
-      JSON.stringify({ selectedImages }, null, 2)
+      JSON.stringify(updatedData, null, 2)
     );
     console.log(
-      `Saved ${selectedImages.length} selected images to ${SELECTED_JSON}`
+      `Saved ${selectedImages.length} new images to ${SELECTED_JSON}`
     );
   } catch (error) {
     console.error("Error saving selected images:", error);
