@@ -14,7 +14,7 @@ const SELECTED_JSON_PATH = path.join(__dirname, "json_selected.json");
 
 function ensureJsonSelectedFileExists() {
   if (!fs.existsSync(SELECTED_JSON_PATH)) {
-    fs.writeFileSync(SELECTED_JSON_PATH, "[]");
+    fs.writeFileSync(SELECTED_JSON_PATH, JSON.stringify({ selectedImages: [] }, null, 2));
     console.log(`Created new json_selected.json file at ${SELECTED_JSON_PATH}`);
   }
 }
@@ -27,10 +27,21 @@ async function getJsonUnusedCount() {
   const jsonTotalCount = jsonData.count;
 
   let selectedImages = [];
-  if (fs.existsSync(SELECTED_JSON_PATH)) {
-    selectedImages = JSON.parse(fs.readFileSync(SELECTED_JSON_PATH, "utf8"));
-    selectedImages = selectedImages.map((entry) => entry.image);
+  try {
+    if (fs.existsSync(SELECTED_JSON_PATH)) {
+      const fileContent = fs.readFileSync(SELECTED_JSON_PATH, "utf8");
+      const parsedContent = JSON.parse(fileContent);
+      // 从 selectedImages 字段获取数组
+      selectedImages = Array.isArray(parsedContent.selectedImages) ? parsedContent.selectedImages : [];
+      selectedImages = selectedImages.map((entry) => entry.image);
+    }
+  } catch (error) {
+    console.error("Error reading or parsing json_selected.json:", error);
+    // 如果文件损坏，重置为空数组
+    selectedImages = [];
+    fs.writeFileSync(SELECTED_JSON_PATH, JSON.stringify({ selectedImages: [] }, null, 2));
   }
+  
   const jsonUnusedCount = jsonTotalCount - selectedImages.length;
   console.log(`📊 GITST JSON 未使用数量: ${jsonUnusedCount}`);
   return { jsonUnusedCount, jsonTotalCount };
