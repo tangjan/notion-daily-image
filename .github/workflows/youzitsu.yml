@@ -1,0 +1,32 @@
+name: Update Notion You-Zitsu Illustration
+
+on:
+  schedule:
+    # UTC+8
+    - cron: "0 22 * * *"
+  workflow_dispatch:
+
+jobs:
+  update_illustration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    env:
+      NOTION_YOUZITSU_API_KEY: ${{ secrets.NOTION_YOUZITSU_API_KEY }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run illustration script
+        run: node scripts/youzitsu/index.js
+        continue-on-error: false
